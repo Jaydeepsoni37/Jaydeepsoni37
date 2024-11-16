@@ -1,0 +1,256 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Developer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Basic styling */
+        body {
+            background: linear-gradient(135deg, #222 0%, #555 100%);
+            color: #A4D8E1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            padding: 1rem;
+        }
+
+        .form-container {
+            background-color: #1E1E1E;
+            padding: 4rem 3rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            min-height: 550px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(164, 216, 225, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+            .form-container:hover {
+                transform: scale(1.02);
+            }
+
+        .welcome-icon {
+            font-size: 3rem;
+            animation: glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                text-shadow: 0 0 10px #A4D8E1, 0 0 20px #A4D8E1, 0 0 30px #A4D8E1;
+            }
+
+            to {
+                text-shadow: 0 0 20px #A4D8E1, 0 0 30px #A4D8E1, 0 0 40px #A4D8E1;
+            }
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: #A4D8E1;
+            margin-top: 1rem;
+        }
+
+        p {
+            color: #ccc;
+            font-size: 1rem;
+            margin: 1rem 0 2rem;
+        }
+
+        .form-toggle-btns button {
+            background-color: #A4D8E1;
+            border: none;
+            color: #1E1E1E;
+            padding: 0.75rem 2rem;
+            margin: 0.5rem;
+            cursor: pointer;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            outline: none;
+        }
+
+            .form-toggle-btns button:hover {
+                background-color: #88C1CB;
+                transform: scale(1.05);
+            }
+
+        .input-container {
+            position: relative;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+            .input-container label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: #A4D8E1;
+                font-weight: bold;
+                margin-left: 20px;
+            }
+
+        input[type="text"], input[type="password"], input[type="email"] {
+            background-color: #333;
+            border: none;
+            color: white;
+            padding: 1rem 10px;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 400px;
+            outline: none;
+            font-size: 1rem;
+            margin: 0 auto;
+        }
+
+        .show-password {
+            background-color: #323232;
+            border: none;
+            color: #A4D8E1;
+            cursor: pointer;
+            font-size: 0.9rem;
+            position: absolute;
+            right: 10px;
+            top: 70%;
+            border: none;
+            outline:none;
+            border-radius: 10%;
+            transform: translateY(-50%);
+        }
+
+            .show-password:focus {
+                background-color: #323232;
+                border: none;
+                color: #A4D8E1;
+                cursor: pointer;
+                font-size: 0.9rem;
+                position: absolute;
+                right: 10px;
+                top: 70%;
+                border: none;
+                outline: none;
+                transform: translateY(-50%);
+            }
+
+        hr.shadow-custom {
+            border: none;
+            height: 2px;
+            background-color: #a4d8e1; /* Light blue color for the main hr line */
+            box-shadow: 2px 4px 12px rgba(164, 216, 225, 0.4), /* soft glow to the right */
+            -2px 4px 6px rgba(164, 216, 225, 0.4);
+        }
+
+        @media (max-width: 576px) {
+            .form-container {
+                padding: 3rem 1.5rem;
+                margin: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <!-- Welcome Screen with Icon and Buttons -->
+        <div id="welcome-screen">
+            <div class="welcome-icon">🚀</div>
+            <h2>Welcome to Our Platform</h2>
+            <p>Join us or log in to access premium features and explore our community.</p>
+            <div class="form-toggle-btns">
+                <button onclick="showForm('login')">Log In</button>
+                <button onclick="showForm('signup')">Sign Up</button>
+            </div>
+        </div>
+
+        <!-- Login Form -->
+        <div id="login-form" class="hidden" style="display: none;">
+            <h2>Log In</h2>
+            <hr class="shadow-custom">
+            <div class="input-container">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" required />
+            </div>
+            <div class="input-container">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" required />
+                <button class="show-password" onclick="togglePassword('login-password', this)">Show</button>
+            </div>
+            <button class="btn btn-primary btn-block">Log In</button>
+            <p class="form-toggle mt-3" onclick="showWelcome()">Back to Welcome</p>
+        </div>
+
+        <!-- Sign Up Form -->
+        <div id="signup-form" class="hidden" style="display: none;">
+            <h2>Sign Up</h2>
+            <hr class="shadow-custom">
+            <div class="input-container">
+                <label for="signup-username">Username</label>
+                <input type="text" id="signup-username" required />
+            </div>
+            <div class="input-container">
+                <label for="signup-email">Email</label>
+                <input type="email" id="signup-email" required />
+            </div>
+            <div class="input-container">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" required />
+                <button class="show-password" onclick="togglePassword('signup-password', this)">Show</button>
+            </div>
+            <button class="btn btn-primary btn-block">Sign Up</button>
+            <p class="form-toggle mt-3" onclick="showWelcome()">Back to Welcome</p>
+        </div>
+    </div>
+
+    <script>
+        function showForm(formType) {
+            document.getElementById('welcome-screen').style.display = 'none';
+            if (formType === 'login') {
+                document.getElementById('login-form').style.display = 'block';
+                document.getElementById('signup-form').style.display = 'none';
+                addEnterKeyNavigation('login-form');  // Enable enter key navigation
+            } else {
+                document.getElementById('signup-form').style.display = 'block';
+                document.getElementById('login-form').style.display = 'none';
+                addEnterKeyNavigation('signup-form');  // Enable enter key navigation
+            }
+        }
+
+        function showWelcome() {
+            document.getElementById('welcome-screen').style.display = 'block';
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'none';
+        }
+
+        function togglePassword(inputId, toggleBtn) {
+            const inputField = document.getElementById(inputId);
+            if (inputField.type === "password") {
+                inputField.type = "text";
+                toggleBtn.textContent = "Hide";
+            } else {
+                inputField.type = "password";
+                toggleBtn.textContent = "Show";
+            }
+        }
+
+        function addEnterKeyNavigation(formId) {
+            const inputs = document.querySelectorAll(`#${formId} input`);
+            inputs.forEach((input, index) => {
+                input.addEventListener("keydown", (event) => {
+                    if (event.key === "Enter") {
+                        event.preventDefault();
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        } else {
+                            // Logic to handle form submission can be added here
+                        }
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>

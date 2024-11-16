@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Frontend Developer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+
+        body {
+            background-image: url("background image.jpeg");
+            background-color: #2a2a2a;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin-top: 160px;
+            padding-top: 160px;
+            overflow-x: hidden;
+            margin: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-image {
+            width: 210px;
+            height: 90px;
+            border-radius: 50%;
+        }
+
+        .navbar {
+            background-color: black;
+        }
+
+        #follow {
+            background-color: green;
+            color: white;
+            font-size: 14px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+        }
+
+            #follow:hover {
+                background-color: darkgreen;
+            }
+
+        .navbar-toggler {
+            border: none;
+            outline: none;
+            box-shadow: none;
+            font-size: 1.25rem;
+        }
+
+            .navbar-toggler:focus {
+                outline: none;
+                border: none;
+                box-shadow: none;
+            }
+
+        .nav-link {
+            color: gray;
+            font-weight: 400;
+            text-decoration: none;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+            .nav-link:hover, .nav-link:active {
+                color: black;
+                font-weight: 500;
+            }
+
+            .nav-link::before {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 0%;
+                height: 2px;
+                background-color: #0B6E4F;
+                transition: width 0.3s ease-in-out;
+            }
+
+            .nav-link:hover::before {
+                color: black;
+                width: 100%;
+            }
+
+            .nav-link:focus {
+                color: black;
+                width: 80%;
+            }
+
+        .skills-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        }
+
+        .skill-image-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            margin-bottom: 20px; /* Space between images */
+        }
+
+        .img-fluid {
+            border-radius: 12%;
+            width: 300px; /* Adjusted width */
+            height: 180px; /* Adjusted height */
+            transition: transform 0.3s ease;
+        }
+
+        .skill-image-container:hover .img-fluid {
+            transform: scale(0.9); /* Image zoom effect on hover */
+        }
+
+
+
+        .overlay {
+            position: absolute;
+            bottom: 0; /* Position below the image */
+            left: 0;
+            right: 0;
+            height: 40px; /* Height of the overlay */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 0 0 10px 10px; /* Rounded corners at the bottom */
+            transition: opacity 0.3s ease;
+            opacity: 0; /* Start hidden */
+        }
+
+        .skill-image-container:hover .overlay {
+            opacity: 1; /* Show overlay on hover */
+        }
+
+        .overlay-text {
+            color: yellow; /* Yellow text color */
+            font-weight: bold; /* Bold text */
+            text-align: center; /* Center the text */
+            padding: 5px; /* Padding for the text */
+        }
+
+        .container {
+            width: calc(100% - 20px); /* Adjusts width to account for 10px margin on both sides */
+            margin-right: 10px;
+            margin-left: 10px;
+            padding: 20px;
+            background-color: #1e1e1e; /* Darker background for the content box */
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+            box-sizing: border-box; /* Ensures padding/border don't add to total width */
+        }
+
+        h1 {
+            color: #ffab00; /* Bright color for main heading */
+            font-weight: bold;
+            text-align: center;
+        }
+
+        hr {
+            border: 0;
+            height: 3px;
+            background-image: linear-gradient(to right, #ff9900, #ff3333, #c700ff, #ff9900);
+            margin: 20px 0;
+        }
+
+        .section-hr {
+            width: 50%;
+            margin: 10px 0;
+            background-image: linear-gradient(to right, #cc7a00, #cc0000, #cc7a00);
+        }
+
+        #hr {
+            background-image: linear-gradient(to right, #ff416c, #ff4b2b, #ffbc00, #a2ff00, #00c6ff, #9b59b6);
+            width: 100%;
+        }
+
+        h2 {
+            color: #ffab00; /* Bright color for subheadings */
+            margin-top: 30px;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        p {
+            margin: 15px 0;
+        }
+
+        .highlight {
+            color: #ff6f61; /* Highlight color */
+            font-weight: bold;
+        }
+
+        .icon {
+            color: #ffab00; /* Icon color matching the headings */
+            margin-right: 10px;
+        }
+
+        .about-footer-box {
+            background-color: #2a2a2a;
+            color: #e0e0e0;
+            padding: 25px;
+            margin-top: 30px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+            .about-footer-box h2 {
+                font-size: 1.8rem;
+                color: #A4D8E1; /* Light accent color to match your theme */
+                margin-bottom: 10px;
+                text-align: center;
+            }
+
+            .about-footer-box p {
+                font-size: 1rem;
+                line-height: 1.6;
+                color: #e0e0e0;
+                max-width: 600px;
+                margin: 0 auto;
+                padding: 5px;
+            }
+
+                .about-footer-box p:last-child {
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                }
+
+        .justified-text {
+            text-align: justify;
+        }
+
+        @media (max-width: 800px) {
+            .container {
+                margin-left: 10px;
+                margin-right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <!-- Main Content -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-sm-dark fixed-top justify-content-end">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto" href="#"><img src="logo.png" class="logo-image" alt="logo-image"></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDarkNavbar" aria-controls="offcanvasDarkNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasDarkNavbar" aria-labelledby="offcanvasDarkNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasDarkNavbarLabel">Dark offcanvas</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item"><a class="nav-link mx-lg-2 mx-md-2 active text-white" href="home.html" id="*">Home</a></li>
+                        <li class="nav-item"><a class="nav-link mx-lg-2 mx-md-2 text-white" href="about.html" id="*">About</a></li>
+                        <li class="nav-item"><a class="nav-link mx-lg-2 mx-md-2 text-white" href="portfolio page.html" id="*">Portfolio</a></li>
+                        <li class="nav-item"><a class="nav-link mx-lg-2 mx-md-2 text-white" href="service.html" id="*">Service</a></li>
+                        <li class="nav-item"><a class="nav-link mx-lg-2 mx-md-2 text-white" href="contect.html" id="*">Contact</a></li>
+
+                    </ul>
+                </div>
+            </div>
+            <button id="follow">+ Follow</button>
+        </div>
+    </nav>
+
+    <div class="container" id="about me" style="margin-left: 10px; margin-right: 10px;">
+        <h1>About Me</h1>
+        <hr>
+
+        <p class="justified-text"><i class="fas fa-user icon"></i>Hello! I'm <span class="highlight">Jaydeep Soni</span>, a passionate frontend developer with a strong foundation in web technologies. I thrive on turning ideas into reality, crafting user-friendly and visually appealing websites that enhance user experience. Currently, I'm pursuing my <span class="highlight">BCA (Bachelor of Computer Applications)</span> at Atmiya University in Rajkot, India, where I am honing my skills and staying updated with the latest trends in web development.</p>
+
+        <h2>My Journey</h2>
+        <hr class="section-hr">
+        <p  class="justified-text"><i class="fas fa-code icon"></i>My journey in the tech world began with a fascination for coding, which quickly evolved into a commitment to creating <span class="highlight">dynamic and responsive web applications</span>. I have successfully completed numerous projects, each contributing to my growth and expertise in HTML, CSS, JavaScript, and frameworks like Bootstrap.</p>
+
+        <h2>My Design Philosophy</h2>
+        <hr class="section-hr">
+        <p  class="justified-text"><i class="fas fa-paint-brush icon"></i>I believe that a well-designed website is the key to engaging users and leaving a lasting impression. My approach emphasizes <span class="highlight">high-quality work</span> with a focus on aesthetics and accessibility, ensuring that each project is both visually appealing and functional. Additionally, I am committed to <span class="highlight">performance optimization</span> as a critical part of the user experience. By continuously learning and adapting to the latest web technologies, I aim to deliver results that not only meet but exceed client expectations.</p>
+
+        <h2>My Vision for the Future</h2>
+        <hr class="section-hr">
+        <p  class="justified-text"><i class="fas fa-lightbulb icon"></i>As I look ahead, I aim to leverage my skills to contribute to projects that not only prioritize functionality but also promote sustainability and ethical practices in web development. I believe in using technology as a force for good, creating <span class="highlight">inclusive digital experiences</span> that cater to diverse audiences.</p>
+    </div>
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col text-white">
+                <h4>Languages I Speak in Code</h4>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col text-white text-center">
+            <h5>Unlock the names of these languages with just a click!</h5>
+            <hr id="hr">
+        </div>
+    </div>
+    <div class="skills-container">
+        <div class="row justify-content-center">    
+            <!-- HTML -->
+            <div class="col-6 col-md-3 skill-image-container text-center">
+                <a>
+                    <img src="HTML logo.png" alt="HTML Logo" class="img-fluid">
+                    <div class="overlay">
+                        <div class="overlay-text ms-5 me-5">HTML</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- CSS -->
+            <div class="col-6 col-md-3 skill-image-container text-center">
+                <a>
+                    <img src="css logo.png" alt="CSS Logo" class="img-fluid">
+                    <div class="overlay">
+                        <div class="overlay-text ms-5 me-5">CSS</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- JavaScript -->
+            <div class="col-6 col-md-3 skill-image-container text-center">
+                <a>
+                    <img src="javascript logo.png" alt="JavaScript Logo" class="img-fluid">
+                    <div class="overlay">
+                        <div class="overlay-text ms-5 me-5">JavaScript</div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Bootstrap -->
+            <div class="col-6 col-md-3 skill-image-container text-center">
+                <a>
+                    <img src="bootstrap logo.png" alt="Bootstrap Logo" class="img-fluid">
+                    <div class="overlay">
+                        <div class="overlay-text ">Bootstrap</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container-fluid text-center">
+    <div class="about-footer-box">
+        <h2>What's Next?</h2>
+        <p>On this journey in front-end development, I’m here to create intuitive, high-performing applications that delight and serve. Here’s to building value in every click!</p>
+
+        <p>Let's create the future of the web together—one project at a time.</p>
+    </div>
+</div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

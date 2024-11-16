@@ -1,0 +1,241 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frontend Developer</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #A4D8E1;
+            color: #333;
+        }
+
+        .form-box {
+            background-color: #ffffff;
+            border: 2px solid #333;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        hr.shadow-custom {
+            border: none;
+            height: 2px;
+            background-color: lightblue;
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .result-box {
+            display: none;
+            background-color: #ffffff;
+            border: 2px solid #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 8px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 500px;
+            margin: 20px auto;
+        }
+
+        .result-title {
+            font-size: 24px;
+            background-color: purple;
+            color: #ffffff;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .result-box p {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+            .result-box p span {
+                font-weight: bold;
+                color: #007bff;
+            }
+
+        .btn-back,
+        .btn-exit {
+            margin-top: 15px;
+            display: inline-block;
+        }
+
+        .btn-back {
+            margin-right: 10px;
+        }
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+            .form-group .label-left {
+                width: 180px; /* Adjust as needed */
+                margin-right: 15px; /* Space between label and input */
+            }
+
+            .form-group .form-control {
+                flex-grow: 1; /* Input takes remaining space */
+            }
+
+        @media (max-width: 487px) {
+            body {
+                font-size: 12px;
+            }
+
+            .result-box {
+                font-size: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="form-box" id="formBox">
+            <h2 class="text-center">Grade Calculator</h2>
+            <hr class="shadow-custom">
+            <form id="gradeForm">
+                <div class="form-group">
+                    <label for="numSubjects">Number of Subjects:</label>
+                    <select class="form-control" id="numSubjects" onchange="toggleSubjectFields()">
+                        <option value="5">5 Subjects</option>
+                        <option value="4">4 Subjects</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="maxMarks" class="label-left">Maximum Marks per Subject:</label>
+                    <input type="number" class="form-control" id="maxMarks" min="1" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject1" class="label-left">Subject 1 Marks:</label>
+                    <input type="number" class="form-control" id="subject1" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject2" class="label-left">Subject 2 Marks:</label>
+                    <input type="number" class="form-control" id="subject2" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject3" class="label-left">Subject 3 Marks:</label>
+                    <input type="number" class="form-control" id="subject3" min="0" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject4" class="label-left">Subject 4 Marks:</label>
+                    <input type="number" class="form-control" id="subject4" min="0" required>
+                </div>
+
+                <div class="form-group" id="subject5Row">
+                    <label for="subject5" class="label-left">Subject 5 Marks:</label>
+                    <input type="number" class="form-control" id="subject5" min="0">
+                </div>
+                <button type="button" class="btn btn-primary" onclick="calculateResults()">Calculate</button>
+            </form>
+        </div>
+
+        <div class="result-box" id="resultBox">
+            <h4 class="result-title">Results</h4>
+            <div id="resultContent"></div>
+            <button class="btn btn-secondary btn-back" onclick="goBack()">Back</button>
+            <button class="btn btn-danger btn-exit" onclick="exitPage()">Exit</button>
+        </div>
+    </div>
+
+    <script>
+        function toggleSubjectFields() {
+            const numSubjects = document.getElementById("numSubjects").value;
+            const subject5Row = document.getElementById("subject5Row");
+
+            if (numSubjects === "4") {
+                subject5Row.style.display = "none";
+                document.getElementById("subject5").value = "";
+            } else {
+                subject5Row.style.display = "flex";
+            }
+        }
+
+        function calculateResults() {
+            const numSubjects = parseInt(document.getElementById("numSubjects").value);
+            const maxMarksPerSubject = parseInt(document.getElementById("maxMarks").value);
+            const maxMarksTotal = numSubjects * maxMarksPerSubject;
+            let marks = [];
+
+            for (let i = 1; i <= numSubjects; i++) {
+                let mark = parseInt(document.getElementById(`subject${i}`).value) || 0;
+                marks.push(mark);
+            }
+
+            const total = marks.reduce((acc, curr) => acc + curr, 0);
+            const percentage = (total / maxMarksTotal) * 100;
+
+            let grade, status;
+            const passingMarks = maxMarksPerSubject * 0.35;
+
+            if (marks.some(mark => mark < passingMarks)) {
+                grade = "---";
+                status = "Fail";
+            } else {
+                if (percentage >= 90) grade = "A";
+                else if (percentage >= 75) grade = "B";
+                else if (percentage >= 50) grade = "C";
+                else if (percentage >= 35) grade = "D";
+                status = "Pass";
+            }
+
+            // Update result content
+            document.getElementById("resultContent").innerHTML = `
+                    <table class="table table-bordered">
+                        <tr><th>Total Marks</th><th style="color:blue;">${total}</th></tr>
+                        <tr><th>Percentage</th><th style="color:blue;">${percentage.toFixed(2)}%</th></tr>
+                        <tr><th>Grade</th><th style="color:blue;">${grade}</th></tr>
+                        <tr><th>Status</th><th style="color:blue;">${status}</th></tr>
+                    </table>
+                `;
+
+            // Show the result box and hide the form
+            document.getElementById("formBox").style.display = "none";
+            document.getElementById("resultBox").style.display = "block";
+        }
+
+        function goBack() {
+            document.getElementById("formBox").style.display = "block";
+            document.getElementById("resultBox").style.display = "none";
+        }
+
+        function exitPage() {
+            window.location.href = "portfolio page.html";
+        }
+
+        function handleEnterKey(event) {
+            if (event.key === "Enter") {
+                event.preventDefault();
+
+                const formInputs = Array.from(document.querySelectorAll(".subject-input, #maxMarks"));
+                const currentIndex = formInputs.indexOf(event.target);
+
+                if (currentIndex !== -1) {
+                    if (currentIndex < formInputs.length - 1) {
+                        formInputs[currentIndex + 1].focus();
+                    } else {
+                        calculateResults();
+                    }
+                }
+            }
+        }
+
+        document.querySelectorAll(".subject-input, #maxMarks").forEach(input => {
+            input.addEventListener("keydown", handleEnterKey);
+        });
+    </script>
+
+</body>
+</html>
